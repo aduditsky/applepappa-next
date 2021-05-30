@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="96" height="96" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #373536;
+        fill-rule: evenodd;
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        font-size: 150px;
+        font-family: Montserrat;
+        font-weight: 800;
+      }
+
+      .cls-2, .cls-3 {
+        text-anchor: middle;
+      }
+
+      .cls-3 {
+        font-size: 58.333px;
+        font-family: "Ink Free";
+      }
+    </style>
+    <filter id="filter" x="94.813" y="12.5" width="326.844" height="337.156" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path id="Crown_Part_2_1_copy" data-name="Crown Part 2 1 copy" class="cls-1" d="M231.061,103.134h54.323V271.713H231.061V103.134h0ZM257.774,12.5c-5.919,0-34.406,26.538-34.406,35.269,0,6.1,30.325,35.318,34.4,35.318,2.764,0,34.274-30.589,35.2-35.111C292.04,40.2,263.666,12.4,257.774,12.5Zm-64.031,92.9c5.471,8.74,9.021,35.379,8.246,48.107C158.794,166.7,157.1,167.252,157.1,167.252l32.523,104.461-55.885-.053L94.8,159.463l22.9-10.538s-0.044-9.635-.458-17.868C133.887,121.765,168.415,110.7,193.743,105.4ZM145.049,299.809H371.4v49.849H145.049V299.809h0ZM322.7,105.4c-5.471,8.74-9.021,35.379-8.245,48.107,43.195,13.195,44.891,13.745,44.891,13.745L326.825,271.713l55.884-.053,38.936-112.2-22.9-10.538s0.044-9.635.458-17.868C382.559,121.765,348.03,110.7,322.7,105.4Z"/>
+  <text id="Gethigh" class="cls-2" transform="translate(256.822 436.763) scale(0.575 0.575)"><tspan x="0">Gethigh</tspan></text>
+  <text id="webcam" class="cls-3" transform="translate(258.234 491.264) scale(1.188)"><tspan x="0">webcam</tspan></text>
+</svg>
