@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/client/react';
-import gql from 'graphql-tag';
 import React, { useState, useEffect } from 'react';
 import {
   CatalogSection,
@@ -11,84 +9,70 @@ import {
 import { Container, Row } from 'react-bootstrap';
 import { Phone } from '../footer/footer.styles';
 import ReactGA from 'react-ga';
-import { Link } from 'react-router-dom';
+import { useMediaQuery } from '../../lib/useMediaQuery';
 
-const CategoryTable = ({ categories }) => {
+const CategoryComponent = ({ categories, models }) => {
   const [show, setShow] = useState(true);
-  const [models, setModels] = useState([]);
-  const [services, setServices] = useState([]);
+
+  const [modelList, setModelList] = useState([]);
+  const [serviceList, setServiceList] = useState([]);
 
   const [activeCategory, setActiveCategory] = useState(categories[0].id);
   const [activeModel, setActiveModel] = useState(categories[0].models[0].id);
 
   useEffect(() => {
-    setModels(
+    setModelList(
       categories?.filter((category) => category.id === activeCategory)[0].models
     );
-    setServices(
-      categories
-        ?.filter((category) => category.id === activeCategory)[0]
-        .models?.filter((model) => model.id === activeModel)[0]?.services
+    setServiceList(
+      models.filter((model) => model.id === activeModel)[0]?.services
     );
-  }, [activeModel, activeCategory, categories]);
+  }, [activeModel, activeCategory]);
 
-  //   Проверка на размерность экрана
+  const [gridSize, setGridSize] = useState(4);
 
-  const [windowWidth, setWindowWidth] = useState(
-    document.documentElement.clientWidth
-  );
-
-  window.addEventListener('resize', () => {
-    setWindowWidth(document.documentElement.clientWidth);
-  });
-
-  const [gridSize, setGridSize] = useState(2);
+  const Mobile = useMediaQuery('(max-width: 540px)');
+  const Tablet = useMediaQuery('(max-width: 768px)');
+  const Laptop = useMediaQuery('(max-width: 992px)');
+  const Desktop = useMediaQuery('(min-width: 993px)');
 
   useEffect(() => {
-    windowWidth >= 768 ? setShow(true) : setShow(false);
-    windowWidth < 380
-      ? setGridSize(2)
-      : windowWidth < 600
-      ? setGridSize(3)
-      : windowWidth < 768
-      ? setGridSize(4)
-      : windowWidth < 980
-      ? setGridSize(5)
-      : setGridSize(6);
-  }, [windowWidth]);
-
-  //   Конец проверки
+    if (Mobile) {
+      setGridSize(2);
+      setShow(false);
+    }
+    if (!Mobile && Tablet) {
+      setGridSize(3);
+      setShow(true);
+    }
+    if (!Mobile && !Tablet && Laptop) {
+      setGridSize(4);
+      setShow(true);
+    }
+    if (!Mobile && !Tablet && !Laptop && Desktop) {
+      setGridSize(6);
+      setShow(true);
+    }
+  }, [Mobile, Tablet, Laptop]);
 
   return (
     <CatalogSection>
       <Container>
         <Row>
           <Column>
-            <p>Навигация по сайту</p>
-            <ModelUl gridColumn={gridSize}>
-              {categories.map((category) => (
-                <Link key={category.id} to={`/${category.slug}`}>
-                  <li>{category.name}</li>
-                </Link>
-              ))}
-            </ModelUl>
-          </Column>
-        </Row>
-        <Row>
-          <Column>
             <h2>
               Выберите ваше устройство
               <br />
               <span>
-                После ремонта мастер проведет полную проверку <br />
-                устройства и выдаст гарантию на ремонт 100 дней
+                После ремонта мастер проведет полную проверку устройства и
+                выдаст гарантию на ремонт 100 дней
               </span>
             </h2>
             <DeviceUl>
               {categories.map((category) => (
                 <li
                   key={category.id}
-                  className={activeCategory === category.id ? 'acitve' : null}
+                  className={activeCategory === category.id ? 'active' : null}
                   onClick={() => {
                     activeCategory !== category.id &&
                       setActiveCategory(category.id);
@@ -106,8 +90,8 @@ const CategoryTable = ({ categories }) => {
               ))}
             </DeviceUl>
             <ModelUl gridColumn={gridSize}>
-              {models &&
-                models.map((model) => (
+              {modelList &&
+                modelList.map((model) => (
                   <li
                     key={model.id}
                     className={activeModel === model.id ? 'active' : null}
@@ -119,7 +103,10 @@ const CategoryTable = ({ categories }) => {
                   </li>
                 ))}
             </ModelUl>
-            <p className='text-center' style={{ fontSize: '20px' }}>
+            <p
+              className='text-center'
+              style={{ fontSize: '20px', margin: '15px 0' }}
+            >
               <b>
                 Не нашли свое устройство? <br /> Уточните по телефону
               </b>
@@ -147,8 +134,8 @@ const CategoryTable = ({ categories }) => {
                 </tr>
               </thead>
               <tbody>
-                {services &&
-                  services.map((service) => (
+                {serviceList &&
+                  serviceList.map((service) => (
                     <tr key={service.id}>
                       <td>{service.name}</td>
                       {show && (
@@ -162,11 +149,13 @@ const CategoryTable = ({ categories }) => {
                       )}
                       {show && <td>{service.time}</td>}
                       <td>
-                        {service.price
-                          ? `${parseInt(service.price).toLocaleString(
-                              'ru'
-                            )} руб.`
-                          : 'Уточните'}
+                        {service.price === 'Бесплатно*'
+                          ? 'Бесплатно*'
+                          : service.price === 'бесплатно'
+                          ? 'Бесплатно*'
+                          : service.price === 'Уточните'
+                          ? `Уточните`
+                          : `${service.price.toLocaleString('ru')} руб.`}
                       </td>
                     </tr>
                   ))}
@@ -180,34 +169,6 @@ const CategoryTable = ({ categories }) => {
       </Container>
     </CatalogSection>
   );
-};
-
-const CategoryComponent = () => {
-  const { loading, error, data } = useQuery(gql`
-    query {
-      categories {
-        id
-        name
-        slug
-        models {
-          id
-          name
-          services {
-            id
-            t_id
-            name
-            price
-            time
-          }
-        }
-      }
-    }
-  `);
-
-  if (loading) return 'Собираем...';
-  if (error) return `Ошибка! ${error.message}`;
-
-  return <CategoryTable categories={data.categories} />;
 };
 
 export default CategoryComponent;

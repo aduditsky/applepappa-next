@@ -23,6 +23,9 @@ export const Column = styled(Col)`
 export const About = styled.div`
   display: flex;
   flex-direction: column;
+  h2 {
+    font-weight: 900;
+  }
 `;
 
 // const width = document.documentElement.clientWidth;

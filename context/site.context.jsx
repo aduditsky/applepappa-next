@@ -1,24 +1,24 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const SiteContext = createContext({
-  title: '',
   modalInfo: false,
+  categories: {},
+  counter: 0,
 });
 
 const SiteProvider = ({ children }) => {
-  const [title, setTitle] = useState(`Apple Pappa`);
+  const [counter, setCounter] = useState(0);
   const [modalInfo, setModalInfo] = useState(false);
-
-  // useEffect(() => {
-  //     document.title = `${title}`;
-  // }, [title])
+  const [categoriesList, setCategoriesList] = useState({});
 
   return (
     <SiteContext.Provider
       value={{
-        title,
-        setTitle,
         modalInfo,
+        categoriesList,
+        counter,
+        setCounter,
+        setCategoriesList,
         setModalInfo,
       }}
     >

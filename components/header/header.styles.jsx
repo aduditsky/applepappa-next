@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Navbar } from 'react-bootstrap';
 
 export const HeaderStyled = styled(Navbar)`
-  padding: 0.5rem 1rem;
+  padding: 0.1rem 1rem;
   background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -25,9 +25,14 @@ export const HeadLogo = styled.div`
   justify-content: center;
   align-items: center;
   margin: 5px auto;
+
   img {
     width: auto;
     height: 50px;
+    transition: 0.2s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 

@@ -19,7 +19,7 @@ const ModalBody = (props) => {
     >
       <Modal.Body>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <h2>
+          <h2 style={{ fontSize: '1.7em', fontWeight: 900 }}>
             Записывайтесь
             <br />
             удобным для вас способом

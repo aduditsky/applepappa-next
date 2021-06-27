@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { SiteContext } from '../../context/site.context';
+import { useMediaQuery } from '../../lib/useMediaQuery';
 
 import {
   AboutJobSection,
@@ -11,21 +12,12 @@ import {
 } from './about.job.styles';
 
 const AboutJob = () => {
-  const { refAbout } = useContext(SiteContext);
-
-  //   const [windowWidth, setWindowWidth] = useState(
-  //     document.documentElement.clientWidth
-  //   );
-
-  //   window.addEventListener('resize', () => {
-  //     setWindowWidth(document.documentElement.clientWidth);
-  //   });
-
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const [gridSize, setGridSize] = useState(5);
 
-  //   useEffect(() => {
-  //     windowWidth < 520 ? setGridSize(1) : setGridSize(5);
-  //   }, [windowWidth]);
+  useEffect(() => {
+    isMobile ? setGridSize(1) : setGridSize(5);
+  }, [isMobile]);
 
   //ref={refAbout}
 

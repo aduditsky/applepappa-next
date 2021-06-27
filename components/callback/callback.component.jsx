@@ -21,7 +21,7 @@ const CallBack = () => {
                 <i className='fas fa-map-marker-alt'></i> г. Красноярск <b />
                 Адрес: Проспект Мира, д. 96
               </p>
-              <a href='/'>Как добраться?</a>
+              {/* <a href='/'>Как добраться?</a> */}
               <p>
                 График работы сервиса: <b />
                 ПН-ВС 11:00 - 20:00 <b />
@@ -37,7 +37,7 @@ const CallBack = () => {
                 height='100%'
                 title={`ApplePappaMap`}
                 style={{ border: 0 }}
-                allowfullscreen=''
+                allowFullScreen=''
                 loading='lazy'
               ></iframe>
               {/* <GMapCanvas>

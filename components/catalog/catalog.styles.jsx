@@ -47,17 +47,7 @@ export const ModelUl = styled.ul`
   width: 100%;
   text-align: center;
   grid-template-columns: ${(props) =>
-    props.gridColumn === 6
-      ? '1fr 1fr 1fr 1fr 1fr 1fr'
-      : props.gridColumn === 5
-      ? '1fr 1fr 1fr 1fr 1fr'
-      : props.gridColumn === 4
-      ? '1fr 1fr 1fr 1fr'
-      : props.gridColumn === 3
-      ? '1fr 1fr 1fr'
-      : props.gridColumn === 2
-      ? '1fr 1fr'
-      : '1fr'};
+    props.gridColumn && `repeat(${props.gridColumn}, 1fr)`};
   padding: 0;
   grid-gap: 15px;
   li {
@@ -102,10 +92,13 @@ export const CatalogSection = styled.section`
     line-height: 1;
     letter-spacing: 0;
     text-align: center;
-    font-weight: 600;
+    font-weight: 800;
+    margin-bottom: 1em;
   }
   span {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    text-align: center;
+    text-transform: none;
     font-weight: 400;
   }
 `;

@@ -8,12 +8,17 @@ const trackingId = 'UA-190320758-1';
 ReactGA.initialize(trackingId);
 
 const Main = () => {
-  const { setModalInfo } = useContext(SiteContext);
+  const { counter, setCounter, setModalInfo } = useContext(SiteContext);
   return (
     <MainSection>
       <Content>
-        <h1>Выездной ремонт Apple</h1>
-        <h2>Куда угодно, когда удобно</h2>
+        <h1
+          onClick={() => {
+            setCounter(counter + 1);
+          }}
+        >
+          ApplePappa.ru - Выездной ремонт Apple <br /> в Красноярске
+        </h1>
         <OrderButton
           onClick={() => {
             setModalInfo(true);
