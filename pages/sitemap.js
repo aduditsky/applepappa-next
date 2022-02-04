@@ -62,9 +62,9 @@ export default function SiteMap({ service }) {
         models: models
           .map((model) =>
             Object.create({
-              name: model.name,
-              slug: model.slug,
-              category: model.category.name,
+              name: model?.name,
+              slug: model?.slug,
+              category: model?.category?.name,
             })
           )
           .filter((model) => model.category === category.name),
@@ -83,7 +83,7 @@ export default function SiteMap({ service }) {
         {SiteMapObj.map((category) => (
           <div
             className='category-block'
-            key={`sitemap-category-${category.name}`}
+            key={`sitemap-category-${category.slug}`}
           >
             <Link href={`/${category.slug}`} passHref>
               <a>
@@ -93,7 +93,7 @@ export default function SiteMap({ service }) {
             <div className='models-block'>
               {category.models.map((model) => (
                 <Link
-                  key={`sitemap-model-${model.name}`}
+                  key={`sitemap-model-${model.slug}`}
                   href={`/${category.slug}/${model.slug}`}
                   passHref
                 >

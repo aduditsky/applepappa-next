@@ -223,7 +223,7 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Head>
-        <meta name='yandex-verification' content='4f09deb238ba6960' />
+        <meta name='yandex-verification' content='7f59f59431ab6784' />
         <link href='/fonts/Graphik-LCG/stylesheet.css' rel='stylesheet' />
         <link href='/fonts/SFProDisplay/stylesheet.css' rel='stylesheet' />
         <link
@@ -267,6 +267,14 @@ export default function App({ Component, pageProps }) {
           color='#303030'
         />
         <link rel='apple-touch-icon' href='%PUBLIC_URL%/logo192.png' />
+
+        {/* OG TAGS */}
+        <meta property='og:url' content='https://applepappa.ru/' />
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:image'
+          content='https://applepappa.ru/og-large.jpg'
+        />
       </Head>
 
       <SiteProvider>
